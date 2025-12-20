@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Modern ve Şık Fontlar: Outfit ve Orbitron */
+        /* Modern ve Şık Fontlar */
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Orbitron:wght@600;800&display=swap');
 
         body {
@@ -53,13 +53,8 @@
             box-shadow: 0 10px 40px -10px rgba(56, 189, 248, 0.2);
         }
 
-        .font-futuristic {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .text-glow {
-            text-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
-        }
+        .font-futuristic { font-family: 'Orbitron', sans-serif; }
+        .text-glow { text-shadow: 0 0 30px rgba(56, 189, 248, 0.4); }
         
         .section-title {
             position: relative;
@@ -70,15 +65,12 @@
         .section-title::after {
             content: '';
             position: absolute;
-            left: 0;
-            bottom: -10px;
-            width: 60px;
-            height: 4px;
+            left: 0; bottom: -10px;
+            width: 60px; height: 4px;
             background: #38bdf8;
             border-radius: 2px;
         }
 
-        /* Navigasyon Linkleri */
         .nav-link {
             position: relative;
             cursor: pointer;
@@ -90,19 +82,14 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
+            width: 0; height: 2px;
+            bottom: -4px; left: 0;
             background-color: #38bdf8;
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover::after {
-            width: 100%;
-        }
+        .nav-link:hover::after { width: 100%; }
 
-        /* Zaman Tüneli Stili */
         .timeline-item {
             position: relative;
             padding-left: 2rem;
@@ -112,48 +99,53 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -6px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
+            left: -6px; top: 6px;
+            width: 10px; height: 10px;
             border-radius: 50%;
             background: #38bdf8;
             box-shadow: 0 0 10px #38bdf8;
         }
 
-        /* Animasyonlar */
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
         }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
         
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
 
-        /* Kaydırma Çubuğu */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+        .hover-line { position: relative; display: inline-block; cursor: default; }
+        .hover-line::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 3px;
+            bottom: -4px; left: 0;
+            background-color: #38bdf8;
+            transition: width 0.3s ease-out;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+        .hover-line:hover::after { width: 100%; }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
 
-    <!-- Canvas Arka Plan Kabı -->
     <div id="canvas-container">
         <canvas id="neuroCanvas"></canvas>
     </div>
 
-    <!-- Navigasyon Çubuğu: max-w-7xl ve px-6 Hero içeriğiyle tam dikey hizalama sağlar -->
+    <!-- Navigasyon Çubuğu -->
     <nav class="fixed w-full z-50 transition-all duration-300 p-4">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center glass-panel rounded-full px-8 py-3 w-full">
-                <!-- Sol Kısım: Başlığın başlangıç çizgisiyle dikeyde tam aynı noktadadır -->
+            <div class="flex justify-between items-center glass-panel rounded-full px-8 py-3 w-full border border-white/5">
                 <div class="flex flex-col items-start justify-center leading-tight select-none cursor-default">
                     <span class="text-sm md:text-base text-sky-400 font-bold tracking-widest uppercase font-futuristic">Biomedical Engineer</span>
                     <div class="text-[10px] md:text-xs text-slate-400 font-medium tracking-wider mt-0.5">
@@ -161,13 +153,13 @@
                     </div>
                 </div>
                 
-                <!-- Sağ Kısım: Menü Linkleri -->
                 <div class="hidden lg:flex space-x-6 text-slate-300">
                     <a href="#home" class="nav-link hover:text-white uppercase">Home</a>
                     <a href="#about" class="nav-link hover:text-white uppercase">My Vision</a>
                     <a href="#skills" class="nav-link hover:text-white uppercase">Skills</a>
                     <a href="#projects" class="nav-link hover:text-white uppercase">Projects</a>
                     <a href="#experience" class="nav-link hover:text-white uppercase">Experience</a>
+                    <a href="#impact" class="nav-link hover:text-white uppercase">Impact</a>
                     <a href="#education" class="nav-link hover:text-white uppercase">Education</a>
                     <a href="#contact" class="nav-link hover:text-white uppercase">Contact</a>
                 </div>
@@ -175,12 +167,10 @@
         </div>
     </nav>
 
-    <!-- Giriş (Hero) Bölümü -->
+    <!-- Hero Bölümü -->
     <section id="home" class="relative min-h-screen flex items-center justify-center pt-32 pb-12">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center w-full">
-            <div class="order-2 md:order-1 flex flex-col items-start">
-                
-                <!-- Ana Başlık: Navbar'daki unvanla tam aynı hizada başlar -->
+            <div class="order-2 md:order-1 flex flex-col items-start text-left">
                 <h1 class="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight fade-in-up delay-100 text-glow font-futuristic">
                     Pioneering <span class="text-sky-400">AI</span> in <br class="hidden md:block"> Biomedical
                 </h1>
@@ -210,7 +200,6 @@
                 </div>
             </div>
 
-            <!-- Profil Fotoğrafı Bölümü -->
             <div class="order-1 md:order-2 flex justify-center fade-in-up delay-200">
                 <div class="relative w-80 h-80 md:w-96 md:h-96 rounded-full glass-panel flex items-center justify-center border-4 border-sky-500/10 backdrop-blur-xl overflow-visible p-1">
                     <img src="https://raw.githubusercontent.com/ASY-crypto/AyseYilmaz.github.io/refs/heads/main/src/resmim.jpeg" 
@@ -225,8 +214,8 @@
         </div>
     </section>
 
-    <!-- Vizyon Bölümü -->
-    <section id="about" class="py-20 relative z-10">
+    <!-- My Vision -->
+    <section id="about" class="py-24 relative z-10">
         <div class="max-w-5xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title font-futuristic text-glow">My Vision</h2>
             <div class="glass-panel p-10 rounded-3xl border border-sky-500/10 shadow-xl">
@@ -241,96 +230,185 @@
         </div>
     </section>
 
-    <!-- Yetenekler Bölümü -->
-    <section id="skills" class="py-20 bg-slate-900/40 relative z-10">
+    <!-- Technical Skills -->
+    <section id="skills" class="py-24 bg-slate-900/40 relative z-10">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center font-futuristic text-glow">Technical Skills</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Temel Teknolojiler -->
                 <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-14 h-14 rounded-2xl bg-sky-500/20 flex items-center justify-center mb-6 text-sky-400 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+                    <div class="w-14 h-14 rounded-2xl bg-sky-500/20 flex items-center justify-center mb-6 text-sky-400">
                         <i class="fas fa-code text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-6 text-white">Core Technologies</h3>
+                    <h3 class="text-2xl font-bold mb-6 text-white hover-line">Core Technologies</h3>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm font-medium text-sky-200">Python</span>
-                        <span class="px-4 py-2 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm font-medium text-sky-200">Machine Learning</span>
-                        <span class="px-4 py-2 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm font-medium text-sky-200">Deep Learning</span>
-                        <span class="px-4 py-2 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm font-medium text-sky-200">OpenCV</span>
-                        <span class="px-4 py-2 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm font-medium text-sky-200">YOLO Algorithms</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm text-sky-200">Python</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm text-sky-200">Machine Learning</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm text-sky-200">Deep Learning</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm text-sky-200">OpenCV</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm text-sky-200">YOLO Algorithms</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm text-sky-200">NLP</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-sky-500/20 rounded-lg text-sm text-sky-200">LLMs & AI Agents</span>
                     </div>
                 </div>
-
+                <!-- Biyomedikal -->
                 <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center mb-6 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center mb-6 text-red-400">
                         <i class="fas fa-heartbeat text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-6 text-white">Biomedical</h3>
+                    <h3 class="text-2xl font-bold mb-6 text-white hover-line">Biomedical</h3>
                     <ul class="space-y-3 text-slate-300 text-base font-light">
                         <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> Biomechanics & Kinematics</li>
                         <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> Medical Imaging (DICOM)</li>
                         <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> HPLC Systems</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> ISO 13485 Manufacturing</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-red-500 mr-3"></i> Device Calibration</li>
                     </ul>
                 </div>
-
+                <!-- Araçlar -->
                 <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-6 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-6 text-emerald-400">
                         <i class="fas fa-tools text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-6 text-white">Tools & Frameworks</h3>
+                    <h3 class="text-2xl font-bold mb-6 text-white hover-line">Tools & Frameworks</h3>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-sm font-medium text-sky-200">Pandas & NumPy</span>
-                        <span class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-sm font-medium text-sky-200">Tensorflow</span>
-                        <span class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-sm font-medium text-sky-200">MATLAB</span>
-                        <span class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-sm font-medium text-sky-200">Generative AI Tools</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">PyTorch</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">Pandas & NumPy</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">Tensorflow</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">Matplotlib</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">SolidWorks (3D)</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">VS Code</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">MATLAB</span>
+                        <span class="px-3 py-1.5 bg-sky-500/10 border border-emerald-500/20 rounded-lg text-sm text-sky-200">Generative AI Tools</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projeler Bölümü -->
-    <section id="projects" class="py-20 relative z-10">
+    <!-- Experience: EKSİKSİZ TÜM DETAYLAR -->
+    <section id="experience" class="py-24 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title font-futuristic text-glow">Experience</h2>
+            <div class="space-y-12">
+                <!-- Long-Term -->
+                <div class="timeline-item">
+                    <div class="bg-slate-800/40 p-8 rounded-2xl border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white hover-line">Biomedical Engineer Intern (Long-Term)</h3>
+                                <p class="text-sky-400 font-medium mt-1">Disera Medical Supplies Logistics | Izmir, Turkey</p>
+                            </div>
+                            <span class="text-slate-400 text-sm mt-2 md:mt-0 font-mono">Feb 2024 – May 2024</span>
+                        </div>
+                        <div class="text-slate-300 font-light space-y-4 leading-relaxed">
+                            <p>
+                                Operation and technical maintenance of <strong>Goldsite GSH-60 Automatic HPLC HbA1c Analyzers</strong>. 
+                                Received certification directly from <strong>GOLDSITE Inc. (China)</strong>. Managed quality control for IVD devices.
+                                Contributed to the R&D and production processes of diagnostic medical devices (Vacuum Blood Collection Systems).
+                            </p>
+                            <p>
+                                <strong>Diagnostic Technology Insight:</strong> Gained comprehensive knowledge of the working principles of Abbott i2000 Hormone Analyzers and Abbott Architect c16000 Biochemistry Analyzers. Observed and analyzed the operational mechanisms of Mindray Hematology devices.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Short-Term R&D -->
+                <div class="timeline-item">
+                    <div class="bg-slate-800/40 p-8 rounded-2xl border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white hover-line">Biomedical Engineer Intern (R&D & Quality) (Short-Term)</h3>
+                                <p class="text-sky-400 font-medium mt-1">Prodorth Spine | Izmir, Turkey</p>
+                            </div>
+                            <span class="text-slate-400 text-sm mt-2 md:mt-0 font-mono">July 2022 – Aug 2022</span>
+                        </div>
+                        <div class="text-slate-300 font-light space-y-2">
+                            <p>Manufacturing of Class IIb spinal implants (ISO 13485). Assisted in dimensional verification and biomechanical testing protocols (compression, torsion) per ASTM/ISO standards.</p>
+                            <p>Assisted in the CAD design and quality control processes of medical devices in compliance with ISO standards and MDR processing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Intern -->
+                <div class="timeline-item">
+                    <div class="bg-slate-800/40 p-8 rounded-2xl border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
+                        <div class="flex flex-col md:flex-row justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white hover-line">Clinical Engineering Intern (Short-Term)</h3>
+                                <p class="text-sky-400 font-medium mt-1">Pamukkale University Hospitals | Denizli, Turkey</p>
+                            </div>
+                            <span class="text-slate-400 text-sm mt-2 md:mt-0 font-mono">June 2022 – July 2022</span>
+                        </div>
+                        <p class="text-slate-300 font-light leading-relaxed">Performed preventive maintenance and calibration on life-support equipment (Defibrillators, Infusion Pumps) and electrical safety tests (IEC 60601). Managed critical medical device operations in a high-volume clinical setting. Collaborated with medical staff to optimize the workflow of biomedical technologies.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Recognition & Impact: KKTC -> TRNC GÜNCELLEMESİ -->
+    <section id="impact" class="py-24 bg-slate-900/40 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title font-futuristic text-glow">Recognition & Impact</h2>
+            <div class="glass-card p-10 rounded-3xl border border-sky-500/10 shadow-xl">
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <i class="fas fa-landmark text-sky-400"></i>
+                    Presentation to the Former President of the Turkish Republic of Northern Cyprus (TRNC)
+                </h3>
+                <p class="text-lg text-slate-200 leading-relaxed font-light italic border-l-4 border-sky-500/30 pl-6">
+                    "Following our university's participation in TEKNOFEST, I, as team leader, presented a strategic briefing to the Former President of the Turkish Republic of Northern Cyprus (TRNC), Mr. Ersin Tatar, to honor the innovators on our campus. I successfully transformed complex biomedical AI architectures into a clear vision for proactive healthcare, demonstrating my ability to communicate the value of high-risk engineering to senior leadership."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects & Research -->
+    <section id="projects" class="py-24 relative z-10">
         <div class="max-w-6xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title font-futuristic text-glow">Projects & Research</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- VisionaryHealth -->
                 <div class="glass-card p-8 rounded-2xl flex flex-col">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">VisionaryHealth</h3>
+                        <h3 class="text-xl font-bold text-white hover-line">VisionaryHealth</h3>
                         <span class="text-xs bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full font-medium">TEKNOFEST 2024 Finalist</span>
                     </div>
                     <p class="text-sm text-slate-400 mb-4 font-mono">Team Captain</p>
-                    <p class="text-slate-300 mb-4 font-light flex-grow">
+                    <p class="text-slate-300 mb-4 font-light flex-grow leading-relaxed">
                         Computer Vision Analysis of Mammography & NLP in Radiology Reports. Developed a hybrid AI model to analyze textual radiology reports and images for enhanced diagnostic accuracy.
                     </p>
                 </div>
-
+                <!-- TÜBİTAK -->
                 <div class="glass-card p-8 rounded-2xl flex flex-col">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">TÜBİTAK 2209-A Project</h3>
+                        <h3 class="text-xl font-bold text-white hover-line">TÜBİTAK 2209-A Project</h3>
                         <span class="text-xs bg-green-500/20 text-green-300 px-3 py-1 rounded-full font-medium">Funded Grant</span>
                     </div>
-                    <p class="text-slate-300 mb-4 font-light flex-grow">
-                        <strong>AI-Supported Detection of Anomalies in Spine X-Ray Images.</strong> Secured grant funding to develop a Deep Learning model detecting scoliosis and fractures.
+                    <p class="text-slate-300 mb-4 font-light flex-grow leading-relaxed">
+                        <strong>AI-Supported Detection of Anomalies in Spine X-Ray Images.</strong> Secured grant funding to develop a Deep Learning model detecting scoliosis and fractures, integrated into a PyQt5 GUI.
                     </p>
                 </div>
-
+                <!-- BAP -->
                 <div class="glass-card p-8 rounded-2xl flex flex-col">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">Scientific Research (BAP)</h3>
+                        <h3 class="text-xl font-bold text-white hover-line">Scientific Research (BAP)</h3>
                         <span class="text-xs bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full font-medium">University Research</span>
                     </div>
-                    <p class="text-slate-300 mb-4 font-light flex-grow">
+                    <p class="text-slate-300 mb-4 font-light flex-grow leading-relaxed">
                         <strong>Automated Determination of BI-RADS Category.</strong> Engineered a YOLOv8 classification system to categorize breast density in mammograms.
                     </p>
                 </div>
-
+                <!-- BioMed-AI -->
                 <div class="glass-card p-8 rounded-2xl flex flex-col">
                     <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-white">BioMed-AI</h3>
+                        <h3 class="text-xl font-bold text-white hover-line">BioMed-AI</h3>
                         <span class="text-xs bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full font-medium">TEKNOFEST 2023 Finalist</span>
                     </div>
                     <p class="text-sm text-slate-400 mb-4 font-mono">Team Captain</p>
-                    <p class="text-slate-300 mb-4 font-light flex-grow">
+                    <p class="text-slate-300 mb-4 font-light flex-grow leading-relaxed">
                         Led the team in developing algorithms for disease identification from medical imaging data.
                     </p>
                 </div>
@@ -338,79 +416,60 @@
         </div>
     </section>
 
-    <!-- Deneyim Bölümü -->
-    <section id="experience" class="py-20 bg-slate-900/40 relative z-10">
-        <div class="max-w-5xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 section-title font-futuristic text-glow">Experience</h2>
-            <div class="space-y-12">
-                <div class="timeline-item">
-                    <div class="bg-slate-800/40 p-8 rounded-2xl border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
-                        <div class="flex flex-col md:flex-row justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Biomedical Engineer Intern (Long-Term)</h3>
-                                <p class="text-sky-400 font-medium mt-1">Disera Medical Supplies Logistics | Izmir</p>
-                            </div>
-                            <span class="text-slate-400 text-sm mt-2 md:mt-0 font-mono">Feb 2024 – May 2024</span>
-                        </div>
-                        <p class="text-slate-300 font-light">Specialized in operation and technical maintenance of automatic HPLC HbA1c Analyzers.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="bg-slate-800/40 p-8 rounded-2xl border border-slate-700/50 hover:bg-slate-800/60 transition-colors">
-                        <div class="flex flex-col md:flex-row justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Biomedical Engineer Intern (R&D)</h3>
-                                <p class="text-sky-400 font-medium mt-1">Prodorth Spine | Izmir</p>
-                            </div>
-                            <span class="text-slate-400 text-sm mt-2 md:mt-0 font-mono">July 2022 – Aug 2022</span>
-                        </div>
-                        <p class="text-slate-300 font-light">Experience in manufacturing spinal implants and biomechanical testing protocols.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Eğitim Bölümü -->
-    <section id="education" class="py-20 relative z-10">
+    <!-- Education & Certifications -->
+    <section id="education" class="py-24 bg-slate-900/40 relative z-10">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
                 <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title font-futuristic text-glow">Education</h2>
                 <div class="space-y-10">
                     <div class="relative pl-8 border-l-2 border-slate-700">
                         <div class="absolute -left-[9px] top-0 w-4 h-4 bg-sky-500 rounded-full shadow-[0_0_10px_#38bdf8]"></div>
-                        <h3 class="text-2xl font-bold text-white">Pamukkale University</h3>
+                        <h3 class="text-2xl font-bold text-white hover-line">Pamukkale University</h3>
                         <p class="text-sky-400 text-lg font-medium">BS in Biomedical Engineering</p>
-                        <p class="text-slate-500 text-sm mb-4 font-mono mt-1">2020 – 2024</p>
-                        <p class="text-slate-300 text-sm italic bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">Thesis: Deep Learning in Spine X-Ray Image Analysis.</p>
+                        <p class="text-slate-500 text-sm mb-4 font-mono mt-1">Sep 2020 – June 2024 | GPA: 3.48/4.00</p>
+                        <p class="text-slate-300 text-sm italic bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 leading-relaxed">
+                            Thesis: "Automatic Detection Of Disc Space Narrowing In Cervical And Lumbar Spine X-Ray Images: A Deep Learning Approach"
+                        </p>
                     </div>
                     <div class="relative pl-8 border-l-2 border-slate-700">
                         <div class="absolute -left-[9px] top-0 w-4 h-4 bg-slate-600 rounded-full"></div>
-                        <h3 class="text-2xl font-bold text-white">Atatürk University</h3>
+                        <h3 class="text-2xl font-bold text-white hover-line">Atatürk University</h3>
                         <p class="text-sky-400 text-lg font-medium">Associate Degree in Computer Programming</p>
-                        <p class="text-slate-500 text-sm mb-4 font-mono mt-1">2021 – 2023 | GPA: 2.88/4.00</p>
+                        <p class="text-slate-500 text-sm mb-4 font-mono mt-1">Sep 2021 – June 2023 | GPA: 2.88/4.00</p>
+                        <p class="text-slate-300 text-sm font-light">Coursework: Database Mgmt, Web Design, Visual Programming, Network Tech.</p>
                     </div>
                 </div>
             </div>
 
             <div>
                 <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title font-futuristic text-glow">Certifications</h2>
-                <div class="glass-panel p-8 rounded-2xl">
+                <div class="glass-panel p-8 rounded-2xl max-h-[550px] overflow-y-auto">
                     <ul class="space-y-6">
                         <li class="flex items-start gap-4">
-                            <i class="fas fa-certificate text-yellow-500 mt-1 text-xl"></i>
+                            <i class="fas fa-certificate text-emerald-500 mt-1 text-xl"></i>
                             <div>
-                                <strong class="text-white block text-lg">Data Science Expertise</strong>
-                                <span class="text-slate-400 text-sm">Europe Coding School (Online)</span>
+                                <strong class="text-white block text-lg leading-tight">Data Science Expertise</strong>
+                                <span class="text-slate-400 text-sm">Europe Coding School (Amsterdam) (Online)</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
                             <i class="fas fa-certificate text-sky-500 mt-1 text-xl"></i>
+                            <div><strong class="text-white block text-lg leading-tight">Goldsite GSH-60 Technical Cert.</strong><span class="text-slate-400 text-sm">GOLDSITE Inc. | 2024</span></div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-certificate text-sky-500 mt-1 text-xl"></i>
                             <div>
-                                <strong class="text-white block text-lg">Goldsite GSH-60 Technical Cert.</strong>
-                                <span class="text-slate-400 text-sm">GOLDSITE Inc. | 2024</span>
+                                <strong class="text-white block text-lg leading-tight">Integrated Quality Mgmt Systems (TSC Career) (Internal Auditor)</strong>
+                                <span class="text-slate-400 text-sm">ISO 9001, 13485, 15189, 17025, 45001, GDP, GHP, GLP, GMP | 2023</span>
                             </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-certificate text-sky-500 mt-1 text-xl"></i>
+                            <div><strong class="text-white block text-lg leading-tight">AI Expertise Training</strong><span class="text-slate-400 text-sm">Riscon Academy & Opsiyon Academy | 2023</span></div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-certificate text-sky-500 mt-1 text-xl"></i>
+                            <div><strong class="text-white block text-lg leading-tight">C# Programming Course</strong><span class="text-slate-400 text-sm">Ecodation Technology | 2022</span></div>
                         </li>
                     </ul>
                 </div>
@@ -418,13 +477,14 @@
         </div>
     </section>
 
-    <!-- Yayınlar ve Ödüller Bölümü: TEKRAR EKLENDİ -->
-    <section class="py-20 bg-slate-900/40 relative z-10">
+    <!-- Publications & Awards -->
+    <section class="py-24 relative z-10">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-8 section-title font-futuristic text-glow">Publications & Awards</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title font-futuristic text-glow">Publications & Awards</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-panel p-8 rounded-2xl">
-                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3"><i class="fas fa-book-open text-sky-400"></i> Publications</h3>
+                <!-- Publications -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/5">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3 hover-line"><i class="fas fa-book-open text-sky-400"></i> Publications</h3>
                     <ul class="space-y-6 text-sm text-slate-300">
                         <li class="pl-4 border-l-2 border-sky-500/30 hover:border-sky-500 transition-colors">
                             <a href="https://ieeexplore.ieee.org/document/10304947" target="_blank" class="group block">
@@ -442,21 +502,22 @@
                         </li>
                     </ul>
                 </div>
-                <div class="glass-panel p-8 rounded-2xl">
-                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3"><i class="fas fa-trophy text-yellow-400"></i> Awards</h3>
+                <!-- Awards -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/5">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3 hover-line"><i class="fas fa-trophy text-yellow-400"></i> Awards</h3>
                     <ul class="space-y-6 text-sm text-slate-300">
-                        <li class="flex items-start gap-4 p-4 bg-slate-800/40 rounded-lg border border-white/5">
+                        <li class="flex items-start gap-4 p-4 bg-slate-800/40 rounded-lg border border-white/5 hover:bg-slate-800/60 transition-colors">
                             <span class="text-yellow-400 text-xl">★</span>
                             <div>
-                                <strong class="text-white block text-base">Denizli Metropolitan Municipality Tech Award</strong>
-                                <span class="text-slate-500 font-mono text-xs">2023</span>
+                                <strong class="text-white block text-base leading-tight">Denizli Metropolitan Municipality Tech Award</strong>
+                                <span class="text-slate-500 font-mono text-xs mt-1 block">2023</span>
                             </div>
                         </li>
-                        <li class="flex items-start gap-4 p-4 bg-slate-800/40 rounded-lg border border-white/5">
+                        <li class="flex items-start gap-4 p-4 bg-slate-800/40 rounded-lg border border-white/5 hover:bg-slate-800/60 transition-colors">
                             <span class="text-yellow-400 text-xl">★</span>
                             <div>
-                                <strong class="text-white block text-base">TÜBİTAK 2209-A Research Grant</strong>
-                                <span class="text-slate-500 font-mono text-xs">Thesis Funding</span>
+                                <strong class="text-white block text-base leading-tight">TÜBİTAK 2209-A Research Grant</strong>
+                                <span class="text-slate-500 font-mono text-xs mt-1 block">Thesis Funding (2024)</span>
                             </div>
                         </li>
                     </ul>
@@ -465,101 +526,49 @@
         </div>
     </section>
 
-    <!-- Footer / İletişim Bölümü -->
+    <!-- Footer -->
     <footer id="contact" class="py-16 mt-auto relative z-10 border-t border-slate-800 bg-slate-900">
         <div class="max-w-5xl mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8 font-futuristic text-glow">Let's Design the Future Together</h2>
             <div class="flex flex-col md:flex-row justify-center gap-8 mb-10 text-slate-300">
-                <!-- Konum -->
                 <div class="flex items-center justify-center gap-3">
                     <i class="fas fa-map-marker-alt text-sky-500"></i>
                     <span>Izmir, Turkey</span>
                 </div>
-                <!-- Telefon Numarası -->
                 <div class="flex items-center justify-center gap-3">
                     <i class="fas fa-phone text-sky-500"></i>
                     <span>+90 534 087 9974</span>
                 </div>
-                <!-- E-posta -->
                 <div class="flex items-center justify-center gap-3">
                     <i class="fas fa-envelope text-sky-500"></i>
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yilmazysesidenur@gmail.com" target="_blank" class="hover:text-white transition-colors">yilmazysesidenur@gmail.com</a>
                 </div>
             </div>
-            
-            <div class="mt-8 text-slate-600 text-sm">
-                &copy; 2024 Ayşe Sidenur Yılmaz. All Rights Reserved.
-            </div>
+            <div class="mt-8 text-slate-600 text-sm">&copy; 2024 Ayşe Sidenur Yılmaz. All Rights Reserved.</div>
         </div>
     </footer>
 
-    <!-- Canvas Script -->
     <script>
         const canvas = document.getElementById('neuroCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
-        
-        const config = {
-            particleCount: 70, 
-            connectionDistance: 140,
-            baseSpeed: 0.4,
-            colors: {
-                particle: 'rgba(56, 189, 248, 0.5)', 
-                connection: 'rgba(56, 189, 248, 0.1)' 
-            }
-        };
-
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            initParticles();
-        }
-
+        const config = { particleCount: 75, connectionDistance: 140, baseSpeed: 0.4, colors: { particle: 'rgba(56, 189, 248, 0.5)', connection: 'rgba(56, 189, 248, 0.1)' } };
+        function resize() { width = window.innerWidth; height = window.innerHeight; canvas.width = width; canvas.height = height; initParticles(); }
         window.addEventListener('resize', resize);
-
         class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * config.baseSpeed;
-                this.vy = (Math.random() - 0.5) * config.baseSpeed;
-                this.size = 2;
-            }
-            update() {
-                this.x += this.vx; this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = config.colors.particle;
-                ctx.fill();
-            }
+            constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random() - 0.5) * config.baseSpeed; this.vy = (Math.random() - 0.5) * config.baseSpeed; this.size = 2; }
+            update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > width) this.vx *= -1; if (this.y < 0 || this.y > height) this.vy *= -1; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = config.colors.particle; ctx.fill(); }
         }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < config.particleCount; i++) particles.push(new Particle());
-        }
-
+        function initParticles() { particles = []; for (let i = 0; i < config.particleCount; i++) particles.push(new Particle()); }
         function animate() {
             ctx.clearRect(0, 0, width, height);
             for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+                particles[i].update(); particles[i].draw();
                 for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const dx = particles[i].x - particles[j].x; const dy = particles[i].y - particles[j].y; const distance = Math.sqrt(dx * dx + dy * dy);
                     if (distance < config.connectionDistance) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - distance / config.connectionDistance)})`;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+                        ctx.beginPath(); ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - distance / config.connectionDistance)})`; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
                     }
                 }
             }
